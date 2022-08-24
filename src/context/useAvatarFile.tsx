@@ -3,6 +3,7 @@ import React, { useContext, useState } from "react";
 interface AvatarFileContextProps {
   file: string;
   status: boolean;
+  error: string;
   sizeImage: {
     axes: number;
     negative: number;
@@ -23,7 +24,8 @@ export const AvatarFileProvider = ({ children }: any) => {
     axes: 100,
     negative: 0,
   });
-  const [status, setStatus] = useState(true);
+  const [status, setStatus] = useState(false);
+  const [error, setError] = useState("");
 
   function clearFileArchive() {
     setSizeImage({
@@ -32,6 +34,7 @@ export const AvatarFileProvider = ({ children }: any) => {
     });
     setFile("");
     setStatus(false);
+    setError("");
   }
 
   function resizeImage(e) {
@@ -45,7 +48,20 @@ export const AvatarFileProvider = ({ children }: any) => {
 
   function handleChange(e) {
     clearFileArchive();
-    setFile(URL.createObjectURL(e.target.files[0]));
+    const archive = e.target.files[0];
+    const fileExtension = archive.name.split(".").at(-1);
+    console.log("fileExtension", fileExtension);
+    const allowedFileTypes = ["jpg", "png", "jpeg", "svg", "webp"];
+
+    if (!allowedFileTypes.includes(fileExtension)) {
+      console.log("if:::", fileExtension);
+      setError(
+        `File does not support. Files type must be ${allowedFileTypes.join(
+          ", "
+        )}`
+      );
+    }
+    setFile(URL.createObjectURL(archive));
   }
 
   function handleDone() {
@@ -57,6 +73,7 @@ export const AvatarFileProvider = ({ children }: any) => {
       value={{
         file,
         status,
+        error,
         handleChange,
         clearFileArchive,
         sizeImage,

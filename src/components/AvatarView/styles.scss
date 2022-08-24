@@ -80,4 +80,60 @@
     transform: rotate(45deg);
     cursor: pointer;
   }
+
+  .error-message {
+    display: flex;
+    flex-direction: column;
+
+    span {
+      color: #c64d32;
+      display: flex;
+      align-items: center;
+
+      .feedback {
+        background-color: #fff;
+        color: #3d485f;
+        width: 15px;
+        height: 15px;
+        padding: 0.1rem;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        margin-left: 1rem;
+
+        cursor: help;
+        position: relative;
+
+        font-size: 12px;
+        transition: all 2s;
+
+        .feedback-message {
+          position: absolute;
+          width: 300px;
+          top: -6rem;
+          background: #fff;
+          padding: 1rem;
+          border-radius: 1rem;
+          right: -1rem;
+
+          display: none;
+        }
+
+        &:hover {
+          .feedback-message {
+            display: block;
+          }
+        }
+      }
+    }
+
+    a {
+      line-height: 34px;
+      color: #3d485f;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+  }
 }

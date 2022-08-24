@@ -1,3 +1,4 @@
+import { useAvatarFile } from "../../context/useAvatarFile";
 import "./styles.scss";
 
 interface ImageRoundProps {
@@ -8,18 +9,26 @@ interface ImageRoundProps {
   };
 }
 export function ImageRound({ file, sizeImage }: ImageRoundProps) {
+  const { error } = useAvatarFile();
+
+  console.log("error:::", error);
+
   return (
     <div className="imageView">
-      <img
-        src={file}
-        alt=""
-        style={{
-          width: `${sizeImage.axes}%`,
-          height: `${sizeImage.axes}%`,
-          top: `-${sizeImage.negative}px`,
-          left: `-${sizeImage.negative}px`,
-        }}
-      />
+      {error !== "" ? (
+        <div className="alert">!</div>
+      ) : (
+        <img
+          src={file}
+          alt=""
+          style={{
+            width: `${sizeImage.axes}%`,
+            height: `${sizeImage.axes}%`,
+            top: `-${sizeImage.negative}px`,
+            left: `-${sizeImage.negative}px`,
+          }}
+        />
+      )}
     </div>
   );
 }
