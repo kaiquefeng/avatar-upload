@@ -1,0 +1,16 @@
+.imageView {
+  position: relative;
+  overflow: hidden;
+  width: 150px;
+  height: 150px;
+  cursor: move;
+  border-radius: 100%;
+
+  img {
+    width: 150px;
+    height: 150px;
+    left: 0px;
+    top: 0px;
+    position: absolute;
+  }
+}

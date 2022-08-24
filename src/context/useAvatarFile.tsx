@@ -1,7 +1,8 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 
 interface AvatarFileContextProps {
   file: string;
+  status: boolean;
   sizeImage: {
     axes: number;
     negative: number;
@@ -9,6 +10,7 @@ interface AvatarFileContextProps {
   handleChange: (e) => void;
   resizeImage: (e) => void;
   clearFileArchive: () => void;
+  handleDone: () => void;
 }
 
 const AvatarFileContext = React.createContext<AvatarFileContextProps>(
@@ -21,10 +23,16 @@ export const AvatarFileProvider = ({ children }: any) => {
     axes: 100,
     negative: 0,
   });
+  const [status, setStatus] = useState(true);
 
-  useEffect(() => {
-    console.log(sizeImage);
-  }, [sizeImage]);
+  function clearFileArchive() {
+    setSizeImage({
+      axes: 100,
+      negative: 0,
+    });
+    setFile("");
+    setStatus(false);
+  }
 
   function resizeImage(e) {
     const { value } = e.target;
@@ -36,22 +44,24 @@ export const AvatarFileProvider = ({ children }: any) => {
   }
 
   function handleChange(e) {
+    clearFileArchive();
     setFile(URL.createObjectURL(e.target.files[0]));
   }
 
-  function clearFileArchive() {
-    console.log("jasdjabdjhab");
-    setFile("");
+  function handleDone() {
+    setStatus(true);
   }
 
   return (
     <AvatarFileContext.Provider
       value={{
         file,
+        status,
         handleChange,
         clearFileArchive,
         sizeImage,
         resizeImage,
+        handleDone,
       }}
     >
       {children}

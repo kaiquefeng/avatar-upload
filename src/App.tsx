@@ -4,11 +4,11 @@ import { AvatarView } from "./components/AvatarView";
 import { useAvatarFile } from "./context/useAvatarFile";
 
 function App() {
-  const { file } = useAvatarFile();
+  const { file, status } = useAvatarFile();
 
   return (
     <div className="container-app">
-      {file ? <AvatarView /> : <AvatarUpload />}
+      {file && !status ? <AvatarView /> : <AvatarUpload />}
     </div>
   );
 }

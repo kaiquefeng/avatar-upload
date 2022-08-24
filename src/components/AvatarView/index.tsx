@@ -1,27 +1,18 @@
 import { useAvatarFile } from "../../context/useAvatarFile";
+import { ImageRound } from "../ImageRound";
 
 import "./styles.scss";
 
 export function AvatarView() {
-  const { file, clearFileArchive, resizeImage, sizeImage } = useAvatarFile();
+  const { file, clearFileArchive, resizeImage, sizeImage, handleDone } =
+    useAvatarFile();
 
   return (
     <div className="container-view">
       <div className="close" onClick={() => clearFileArchive()}>
         +
       </div>
-      <div className="imageView">
-        <img
-          src={file}
-          alt=""
-          style={{
-            width: `${sizeImage.axes}%`,
-            height: `${sizeImage.axes}%`,
-            top: `-${sizeImage.negative}px`,
-            left: `-${sizeImage.negative}px`,
-          }}
-        />
-      </div>
+      <ImageRound file={file} sizeImage={sizeImage} />
       <div className="content-view">
         <span>CROP</span>
         <input
@@ -33,7 +24,7 @@ export function AvatarView() {
           onChange={resizeImage}
         />
         <div className="action">
-          <button>Save</button>
+          <button onClick={() => handleDone()}>Save</button>
         </div>
       </div>
     </div>
