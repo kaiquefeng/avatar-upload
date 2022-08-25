@@ -8,7 +8,7 @@ export function AvatarUpload() {
   const { handleChange, file, sizeImage, status } = useAvatarFile();
 
   return (
-    <div className="container-input">
+    <div className="container-input" data-test-id="container-input">
       <input
         type="file"
         name="file"
@@ -16,7 +16,7 @@ export function AvatarUpload() {
         onChange={handleChange}
         placeholder="Upload"
       />
-      <label htmlFor="file">
+      <label htmlFor="file" data-test-id="upload-button">
         {status && <ImageRound file={file} sizeImage={sizeImage} />}
 
         <div

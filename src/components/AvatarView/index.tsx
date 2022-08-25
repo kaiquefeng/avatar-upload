@@ -8,8 +8,12 @@ export function AvatarView() {
     useAvatarFile();
 
   return (
-    <div className="container-view">
-      <div className="close" onClick={() => clearFileArchive()}>
+    <div className="container-view" data-test-id="container-view">
+      <div
+        className="close"
+        data-test-id="button-close"
+        onClick={() => clearFileArchive()}
+      >
         +
       </div>
       <ImageRound file={file} sizeImage={sizeImage} />
@@ -22,7 +26,9 @@ export function AvatarView() {
                 ?<div className="feedback-message">{error}</div>
               </div>
             </span>
-            <a onClick={() => clearFileArchive()}>Try again</a>
+            <a onClick={() => clearFileArchive()} data-test-id="try-again">
+              Try again
+            </a>
           </div>
         ) : (
           <>
@@ -33,10 +39,12 @@ export function AvatarView() {
               min="100"
               max="200"
               value={sizeImage.axes}
-              onChange={resizeImage}
+              onInput={resizeImage}
             />
             <div className="action">
-              <button onClick={() => handleDone()}>Save</button>
+              <button data-test-id="done-button" onClick={() => handleDone()}>
+                Save
+              </button>
             </div>
           </>
         )}

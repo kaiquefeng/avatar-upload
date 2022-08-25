@@ -19,6 +19,7 @@ export function ImageRound({ file, sizeImage }: ImageRoundProps) {
         <div className="alert">!</div>
       ) : (
         <img
+          data-test-id="image-rounded"
           src={file}
           alt=""
           style={{
