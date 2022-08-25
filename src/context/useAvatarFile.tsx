@@ -8,8 +8,8 @@ interface AvatarFileContextProps {
     axes: number;
     negative: number;
   };
-  handleChange: (e) => void;
-  resizeImage: (e) => void;
+  handleChange: (e: Event) => void;
+  resizeImage: (e: Event) => void;
   clearFileArchive: () => void;
   handleDone: () => void;
 }
@@ -37,23 +37,24 @@ export const AvatarFileProvider = ({ children }: any) => {
     setError("");
   }
 
-  function resizeImage(e) {
-    const { value } = e.target;
+  function resizeImage(e: Event) {
+    const { value } = e.target as HTMLInputElement;
     console.log(value);
     setSizeImage({
       axes: parseInt(value, 10),
-      negative: value / 9,
+      negative: Number(value) / 9,
     });
   }
 
-  function handleChange(e) {
+  function handleChange(e: Event) {
     clearFileArchive();
-    const archive = e.target.files[0];
+    const target = e.target as HTMLInputElement;
+    const archive = (target.files as FileList)[0];
     const fileExtension = archive.name.split(".").at(-1);
     console.log("fileExtension", fileExtension);
     const allowedFileTypes = ["jpg", "png", "jpeg", "svg", "webp"];
 
-    if (!allowedFileTypes.includes(fileExtension)) {
+    if (!allowedFileTypes.includes(fileExtension as string)) {
       console.log("if:::", fileExtension);
       setError(
         `File does not support. Files type must be ${allowedFileTypes.join(

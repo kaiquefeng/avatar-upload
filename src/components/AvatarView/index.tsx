@@ -39,6 +39,7 @@ export function AvatarView() {
               min="100"
               max="200"
               value={sizeImage.axes}
+              // @ts-ignore
               onInput={resizeImage}
             />
             <div className="action">

@@ -13,6 +13,8 @@ export function AvatarUpload() {
         type="file"
         name="file"
         id="file"
+        // @ts-ignore
+
         onChange={handleChange}
         placeholder="Upload"
       />
